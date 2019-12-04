@@ -2,6 +2,7 @@ package com.example.roadcamera.controller;
 
 import com.example.roadcamera.domain.Car;
 import com.example.roadcamera.repos.CarRepo;
+import com.example.roadcamera.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +13,9 @@ import java.util.Map;
 
 @Controller
 public class MainController {
+
+    @Autowired
+    public CarService carService;
 
     @Autowired
     private CarRepo carRepo;
@@ -26,10 +30,14 @@ public class MainController {
     @PostMapping("/registeredCars")
     public String addCarNumber(@RequestParam String carNumber, Map<String, Object> model){
         Car car = new Car(carNumber);
-        carRepo.save(car);
-        Iterable<Car> cars = carRepo.findAll();
-        model.put("cars", cars);
-        return "registeredCars";
+        if (carService.validate(carNumber)) {
+            carRepo.save(car);
+            Iterable<Car> cars = carRepo.findAll();
+            model.put("cars", cars);
+            return "registeredCars";
+        }else {
+            return "registeredCars";
+        }
     }
 
     @PostMapping("filter")
