@@ -5,6 +5,7 @@ import com.example.roadcamera.repos.CarRepo;
 import com.example.roadcamera.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -40,7 +41,7 @@ public class MainController {
         }
     }
 
-    @PostMapping("filter")
+    @PostMapping("/filter")
     public String filter(@RequestParam String filter, Map<String, Object> model){
         Iterable<Car> cars;
         if (filter != null && !filter.isEmpty()) {
@@ -52,5 +53,10 @@ public class MainController {
         return "registeredCars";
     }
 
-
+    @GetMapping("/registeredCars/count")
+    public String count(Map<String, Object> model){
+        Iterable<Car> carId =  carRepo.registeredCarsCount();
+        model.put("carId", carId);
+        return "registeredCars";
+    }
 }
