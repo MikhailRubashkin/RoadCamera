@@ -1,0 +1,25 @@
+<html>
+
+<body>
+<div>
+    <form method="post">
+        <input type="text" name="carNumber" placeholder="add Car Number" />
+        <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
+        <button type="submit">Registration</button>
+    </form>
+</div>
+<div>List Car Number</div>
+<form method="post" action="filter">
+    <input type="text" name="filter">
+    <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
+    <button type="submit">Search</button>
+</form>
+{{#cars}}
+    <div>
+        <b>{{id}}</b>
+        <span>{{carNumber}}</span>
+        <i>{{timestamp}}</i>
+    </div>
+{{/cars}}
+</body>
+</html>

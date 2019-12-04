@@ -28,6 +28,10 @@ public class Car implements Serializable {
         this.timestamp = timestamp;
     }
 
+    public Car(String carNumber) {
+        this.carNumber = carNumber;
+    }
+
     public Integer getId (){
         return id;
     }
