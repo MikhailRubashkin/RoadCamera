@@ -2,16 +2,14 @@
 
 <body>
 <div>
-    <form method="post">
-        <input type="text" name="carNumber" placeholder="add Car Number" />
-        <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
+    <form method="post" action="/registeredCars">
+        <input type="text" name="carNumber" placeholder="Add Car Number" />
         <button type="submit">Registration</button>
     </form>
 </div>
 <div>List Car Number</div>
 <form method="post" action="filter">
     <input type="text" name="filter">
-    <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
     <button type="submit">Search</button>
 </form>
 {{#cars}}
